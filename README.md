@@ -19,3 +19,4 @@ La calculatrice prend en charge les opérations de base telles que l'addition, l
     -Arnaud Beaulieu
     -Loris PLanté
     -Paul Decalf
+    -Paul Serrano
