@@ -27,3 +27,8 @@ def test_power_with_parametrize(a,b, expected):
     x = MathOperations()
     assert x.power(a,b) == expected
 
+@pytest.mark.parametrize("a, b, expected", [(10,4,2),(-10,-4,-2),(2,1,0),])
+def test_modulo_with_parametrize(a,b, expected):
+    x = MathOperations()
+    assert x.modulo(a,b) == expected
+
