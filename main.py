@@ -1,6 +1,10 @@
+from math import sqrt
+
 ERROR_INVALID_PARAMS = "Veuillez entrer des nombres valides"
 ERROR_ZERO_DIVISION = "Division par zéro impossible"
 ERROR_POWER = "Pas de puissances non entière pour les nombres négatifs"
+ERROR_SQRT = "Pas de Racine carré d'un nombre négatif"
+ERROR_OPERATION = "Veuillez rentrer une opération prises en charge !"
 
 NUMBER = "Saisissez le nombre : "
 FIRST_NUMBER = "Saisissez le premier nombre : "
@@ -10,97 +14,115 @@ RESULT = "Voici votre résultat : "
 class MathOperations:
 
     def __init__(self):
+
+        self.run = True
+
+        self.operation_choice = {
+            "+": {
+                "name": 'une addition',
+                "calcul": self.addition
+            },
+            "-": {
+                "name": 'une soustraction',
+                "calcul": self.substraction
+            },
+            "*": {
+                "name": 'une multiplication',
+                "calcul": self.multiplication
+            },
+            "/": {
+                "name": 'une division',
+                "calcul": self.division
+            },
+            "**": {
+                "name": 'une puissance',
+                "calcul": self.power
+            },
+            "%": {
+                "name": 'un modulo',
+                "calcul": self.modulo
+            },
+            "sqrt": {
+                "name": 'une racine carrée',
+                "calcul": self.sqrt
+            },
+        }
+
         self.first_number = 0
         self.second_number = 0
         self.number = 0
-        self.calcul = ''
+        self.result = 0
 
     def addition(self, a, b):
-        if not isinstance(a, (int, float))or not isinstance(b, (int, float)):
+        if not (isinstance(a, (int, float)) or not isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         return a + b
     
     def substraction(self, a, b):
-        if not (isinstance(a, (int, float))) or not (isinstance(b, (int, float))):
+        if not (isinstance(a, (int, float)) or not isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         return a - b
     
     def multiplication(self, a, b):
-        if not (isinstance(a, (int, float)) or not isinstance(b, (int, float))):
+        if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         return a * b
     
     def division(self, a, b):
-        if not (isinstance(a, (int, float)) or not isinstance(b, (int, float))):
+        if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         if b != 0:
             return a / b
         raise ValueError(ERROR_ZERO_DIVISION)
             
     def power(self, a, b):
-        if not (isinstance(a, (int, float)) or not isinstance(b, (int, float))):
+        if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         if a < 0 and not isinstance(b, (int)):
             raise ValueError(ERROR_POWER)
         return a ** b
         
     def modulo(self, a, b):
-        if not (isinstance(a, (int)) or not isinstance(b, (int))):
+        if not (isinstance(a, (int)) and isinstance(b, (int))):
             raise ValueError(ERROR_INVALID_PARAMS)
         if b == 0:
             raise ValueError(ERROR_ZERO_DIVISION)
         return a % b
     
+    def sqrt(self, a):
+        if type(a) not in [int, float]:
+            raise ValueError(ERROR_INVALID_PARAMS)
+        if a < 0:
+            raise ValueError(ERROR_SQRT)
+        return sqrt(a)
+    
     def main(self):
-        go = True
-        while go:
+        while self.run:
             print('Veuillez choisir une opération parmis les suivantes : ')
-            print('addition -> +')
-            print('soustraction -> -')
-            print('multiplication -> *')
-            print('division -> /')
-            print('puissance -> **')
-            print('modulo -> %')
+            for symbole, operation_info in self.operation_choice.items():
+                print(f"Pour {operation_info['name']}, entrez '{symbole}'")
             self.calcul = input('')
-            if self.calcul == "":
+            if self.calcul not in self.operation_choice:
+                raise ValueError(ERROR_OPERATION)
+            if self.calcul == "sqrt":
                 print(NUMBER)
-                self.number = input()
-                print(self.number)
+                self.number = float(input())
             else:
                 print(FIRST_NUMBER)
-                self.first_number = input()
+                self.first_number = float(input())
                 print(SECOND_NUMBER)
-                self.second_number = input()
+                self.second_number = float(input())
             self.calcul_choice(self.calcul)
             print('Souhaitez vous opérer une nouvelle fois ?')
             again = input('yes / no : ----> ')
             if again == 'no':
-                go = False
+                self.run = False
 
     def calcul_choice(self, operation):
-        if operation not in ['+', '-', '*', '/', '**', '', '%']:
-            raise ValueError('wesh')
-        if operation == "":
-            print(self.number)
+        if operation == "sqrt":
+            self.result = self.operation_choice[operation]['calcul'](self.number)
         else:
-            if operation == "+":
-                result = self.addition(self.first_number, self.second_number)
-                
-            elif operation == "-":
-                result = self.substraction(self.first_number, self.second_number)
-                
-            elif operation == "*":
-                result = self.multiplication(self.first_number, self.second_number)
-                
-            elif operation == "/":
-                result = self.division(self.first_number, self.second_number)
-                
-            elif operation == "**":
-                result = self.power(self.first_number, self.second_number)
-                
-            elif operation == "%":
-                result = self.modulo(self.first_number, self.second_number)
-
-            print(result)
+            self.result = self.operation_choice[operation]['calcul'](self.first_number, self.second_number)
+        print(self.result)
                 
 
