@@ -10,6 +10,9 @@ NUMBER = "Saisissez le nombre : "
 FIRST_NUMBER = "Saisissez le premier nombre : "
 SECOND_NUMBER = "Saisissez le second nombre : "
 RESULT = "Voici votre résultat : "
+OPERATION_CHOICE = "Veuillez choisir une opération parmis les suivantes : "
+AGAIN = "Souhaitez vous opérer une nouvelle fois ?"
+AGAIN_CHOICE = "yes / no : -----> "
 
 class MathOperations:
 
@@ -98,7 +101,7 @@ class MathOperations:
     
     def main(self):
         while self.run:
-            print('Veuillez choisir une opération parmis les suivantes : ')
+            print(OPERATION_CHOICE)
             for symbole, operation_info in self.operation_choice.items():
                 print(f"Pour {operation_info['name']}, entrez '{symbole}'")
             self.calcul = input('')
@@ -113,8 +116,8 @@ class MathOperations:
                 print(SECOND_NUMBER)
                 self.second_number = float(input())
             self.calcul_choice(self.calcul)
-            print('Souhaitez vous opérer une nouvelle fois ?')
-            again = input('yes / no : ----> ')
+            print(AGAIN)
+            again = input(AGAIN_CHOICE)
             if again == 'no':
                 self.run = False
 
