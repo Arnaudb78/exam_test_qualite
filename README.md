@@ -13,6 +13,18 @@ La calculatrice prend en charge les opérations de base telles que l'addition, l
     git clone https://github.com/votre-utilisateur/calculatrice-python.git
     cd calculatrice-python
     ```
+2. Installer les dépendences
+    ```
+    pip install
+    ```
+
+## Lancement application
+
+1. Lancer la calculate :
+   `python main.py`
+
+2. Lancer les tests :
+   `pytest tests/test.py`
 
 ### Membres du groupe
 

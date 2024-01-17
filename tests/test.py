@@ -8,9 +8,9 @@ def test_addition_with_parametrize(a,b, expected):
     assert x.addition(a,b) == expected
 
 @pytest.mark.parametrize("a, b, expected", [(2,1,1),(-1,-2,1),(10.5,10.5, 0)])
-def test_substraction_with_parametrize(a,b, expected):
+def test_subtraction_with_parametrize(a,b, expected):
     x = MathOperations()
-    assert x.substraction(a,b) == expected
+    assert x.subtraction(a,b) == expected
 
 @pytest.mark.parametrize("a, b, expected", [(2,2,4),(-6,-2,12),(10.5,10.5,110.25)])
 def test_multiplication_with_parametrize(a,b, expected):
