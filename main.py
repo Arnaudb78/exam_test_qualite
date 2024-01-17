@@ -6,7 +6,6 @@ ERROR_POWER = "Pas de puissances non entière pour les nombres négatifs"
 
 class MathOperations :
     def __init__(self):
-        self.choice = 'O'
         self.operators = {
             '+': self.addition,
             '-': self.subtraction,
@@ -26,7 +25,7 @@ class MathOperations :
             raise ValueError(ERROR_INVALID_PARAMS)
         return a - b
     
-    def multiplication(self,a : float, b : float):
+    def multiplication(self, a : float, b : float):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         return a * b
@@ -69,8 +68,9 @@ class MathOperations :
     
     def main(self):
         print('Voulez vous effectuer une opération ?')
-        self.choice = input('Saisir O pour oui, * pour non : ')
-        while self.choice == 'O':
+        choice = 'O'
+        while choice == 'O':
+            choice = input('Saisir O pour oui, * pour non : ')
             expression = input('saisir votre calcul :')
             calc = self.parse(expression)
             result = self.evaluate(calc)
