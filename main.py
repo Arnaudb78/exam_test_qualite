@@ -18,7 +18,8 @@ class MathOperations :
             '*': self.multiplication,
             '/': self.division,
             '**': self.power,
-            '%': self.modulo
+            '%': self.modulo,
+            '^' : self.power
         }
 
     def addition(self, a : float, b : float):
@@ -51,7 +52,7 @@ class MathOperations :
         return a ** b
         
     def modulo(self, a : float, b : float):
-        if not (isinstance(a, (int)) and isinstance(b, (int))):
+        if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         if b == 0:
             raise ValueError(ERROR_ZERO_DIVISION)
@@ -77,7 +78,6 @@ class MathOperations :
         choice = 'O'
         while choice == 'O':
             choice = input(USER_CHOICE)
-        
             if choice == '*':
                 print(END_PROGRAM)
                 break  
