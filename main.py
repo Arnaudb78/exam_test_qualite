@@ -9,8 +9,7 @@ USER_CALCUL = "Saisir votre calcul :"
 END_PROGRAM = "Programme terminé."
 
 
-
-class MathOperations :
+class MathOperations:
     def __init__(self):
         self.operators = {
             '+': self.addition,
@@ -19,45 +18,45 @@ class MathOperations :
             '/': self.division,
             '**': self.power,
             '%': self.modulo,
-            '^' : self.power
+            '^': self.power
         }
 
-    def addition(self, a : float, b : float):
+    def addition(self, a: float, b: float):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         return a + b
-    
-    def subtraction(self, a : float, b : float):
+
+    def subtraction(self, a: float, b: float):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         return a - b
-    
-    def multiplication(self, a : float, b : float):
+
+    def multiplication(self, a: float, b: float):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         return a * b
-    
-    def division(self, a : float, b : float):
+
+    def division(self, a: float, b: float):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         if b != 0:
             return a / b
         raise ValueError(ERROR_ZERO_DIVISION)
-            
-    def power(self, a : float, b : float):
+
+    def power(self, a: float, b: float):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         if a < 0 and not isinstance(b, (int)):
             raise ValueError(ERROR_POWER)
         return a ** b
-        
-    def modulo(self, a : float, b : float):
+
+    def modulo(self, a: float, b: float):
         if not (isinstance(a, (int, float)) and isinstance(b, (int, float))):
             raise ValueError(ERROR_INVALID_PARAMS)
         if b == 0:
             raise ValueError(ERROR_ZERO_DIVISION)
         return a % b
-    
+
     def evaluate(self, calc):
         if calc == []:
             raise ValueError(ERROR_OPERAND)
@@ -69,10 +68,10 @@ class MathOperations :
             operand = float(calc[i+1])
             res = operator(res, operand)
         return res
-    
+
     def parse(self, expression):
         return [op for op in expression.split(' ') if op.strip() != '']
-    
+
     def main(self):
         print(USER_ANSWER)
         choice = 'O'
@@ -80,7 +79,7 @@ class MathOperations :
             choice = input(USER_CHOICE)
             if choice == '*':
                 print(END_PROGRAM)
-                break  
+                break
             else:
                 expression = input(USER_CALCUL)
                 calc = self.parse(expression)
